@@ -51,6 +51,7 @@ app.get('/', (req, res) => {
   res.send('✅ API is running...');
 });
 
+
 // MongoDB Connection
 mongoose.connect(MONGO_URL)
   .then(() => {
