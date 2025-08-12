@@ -52,13 +52,17 @@ app.get('/', (req, res) => {
 });
 
 // MongoDB Connection
-mongoose.connect(MONGO_URL)
-  .then(() => {
-    console.log('✅ MongoDB connected');
-    app.listen(PORT, () => {
-      console.log(`🚀 Server running at http://localhost:${PORT}`);
-    });
-  })
-  .catch((err) => {
-    console.error('❌ MongoDB connection error:', err.message);
+mongoose.connect(MONGO_URL, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
+.then(() => {
+  console.log('✅ MongoDB connected');
+  app.listen(PORT, () => {
+    console.log(`🚀 Server running at http://localhost:${PORT}`);
   });
+})
+.catch((err) => {
+  console.error('❌ MongoDB connection error:', err.message);
+});
+
