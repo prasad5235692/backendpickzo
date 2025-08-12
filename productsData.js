@@ -1187,7 +1187,7 @@ const products = [
     ]
   },
   {
-    title: "Butterfly Smart Gas Stove 2 Burner",
+    title: "Butterfly Gas Stove 2 Burner",
     image: "https://res.cloudinary.com/dnqjvt7yb/image/upload/v1754737780/igilhcqjwb7me32qc44p.jpg",
     price: 2799,
     description: "Toughened glass-top gas stove with 2 burners.",
@@ -1213,7 +1213,7 @@ const products = [
     ]
   },
   {
-    title: "Cello Plastic Containers Set (12 pcs)",
+    title: "Cello Plastic Containers(12 pcs)",
     image: "https://res.cloudinary.com/dnqjvt7yb/image/upload/v1754737916/qpnv1hbs6okjt7qezi9o.jpg",
     price: 599,
     description: "Airtight plastic containers set for food storage.",
@@ -1371,7 +1371,7 @@ const products = [
     category: ["Beauty", "Hair Care", "Hair Oil"]
   },
   {
-    title: "Tresemme Keratin Smooth Shampoo",
+    title: "Tresemme Keratin Shampoo",
     image: "https://res.cloudinary.com/dnqjvt7yb/image/upload/v1754738832/bkar8xidm27jex6dlofk.jpg",
     price: 499,
     description: "Salon-quality shampoo with keratin and argan oil.",
@@ -1389,7 +1389,7 @@ const products = [
     category: ["Beauty", "Skincare", "Night Care"]
   },
   {
-    title: "Maybelline Fit Me Matte+Poreless Foundation",
+    title: "Maybelline Poreless Foundation",
     image: "https://res.cloudinary.com/dnqjvt7yb/image/upload/v1754738225/ispfrn4z849cza69uzjk.jpg",
     price: 549,
     description: "Foundation for normal to oily skin with matte finish.",
