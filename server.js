@@ -17,18 +17,19 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 const MONGO_URL = process.env.MONGO_URL;
 
-// Allowed origins for CORS
-const allowedOrigins = [
-  'http://localhost:3000',
-  'https://pickzo.vercel.app/'
-];
+// Read allowed origins from .env and clean them
+const allowedOrigins = process.env.ALLOWED_ORIGINS
+  ? process.env.ALLOWED_ORIGINS.split(',').map(o => o.trim().replace(/\/$/, ''))
+  : [];
 
+// CORS middleware
 app.use(cors({
   origin: (origin, callback) => {
-    if (!origin || allowedOrigins.includes(origin)) {
+    const cleanOrigin = origin?.replace(/\/$/, '');
+    if (!origin || allowedOrigins.includes(cleanOrigin)) {
       callback(null, true);
     } else {
-      callback(new Error('CORS policy violation: Origin not allowed'));
+      callback(new Error(`CORS policy violation: Origin ${origin} not allowed`));
     }
   },
   credentials: true,
