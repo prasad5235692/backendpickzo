@@ -37,11 +37,14 @@ app.get('/', (req, res) => {
 });
 
 // MongoDB Connection
-import connectDB from './config/db.js';
-
-// Connect to MongoDB
-connectDB().then(() => {
-  app.listen(PORT, () => {
-    console.log(`🚀 Server running at http://localhost:${PORT}`);
+// MongoDB Connection
+mongoose.connect(MONGO_URL)
+  .then(() => {
+    console.log('✅ MongoDB connected');
+    app.listen(PORT, () => {
+      console.log(`🚀 Server running at http://localhost:${PORT}`);
+    });
+  })
+  .catch((err) => {
+    console.error('❌ MongoDB connection error:', err.message);
   });
-});
