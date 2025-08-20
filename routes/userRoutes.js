@@ -1,10 +1,13 @@
 import express from 'express';
-import { getProfile, updateProfile } from '../controllers/userController.js';
 import { verifyToken } from '../middleware/verifyToken.js';
+import { getProfile, updateProfile } from '../controllers/userController.js';
 
 const router = express.Router();
 
+// ✅ Get user profile
 router.get('/profile', verifyToken, getProfile);
-router.put('/profile', verifyToken, updateProfile);
+
+// ✅ Update user profile
+router.put('/profile', verifyToken, updateProfile);  // ✅ FIXED: Added verifyToken middleware
 
 export default router;
