@@ -1,32 +1,27 @@
 import User from '../models/User.js';
 
-// ✅ Get user profile (GET /users/profile)
+// Get Profile
 export const getProfile = async (req, res) => {
-  console.log("📥 Fetching profile for userId:", req.user?.userId);
-
   try {
-    const user = await User.findById(req.user.userId).select('-password');
+    const user = await User.findById(req.user.id).select('-password');
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
     }
-
     res.json(user);
   } catch (err) {
-    console.error('❌ getProfile error:', err.message);
+    console.error('getProfile error:', err.message);
     res.status(500).json({ message: 'Server error' });
   }
 };
 
-// ✅ Update user profile (PUT /users/profile)
-
+// Update Profile
 export const updateProfile = async (req, res) => {
   try {
-    const user = await User.findById(req.user.userId);
+    const user = await User.findById(req.user.id);
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
     }
 
-    // Update fields if provided
     user.name = req.body.name || user.name;
     user.email = req.body.email || user.email;
     user.phone = req.body.phone || user.phone;
@@ -34,9 +29,10 @@ export const updateProfile = async (req, res) => {
 
     const updatedUser = await user.save();
     const { password, ...userWithoutPassword } = updatedUser.toObject();
-    res.json(userWithoutPassword); // Return updated profile
+
+    res.json(userWithoutPassword);
   } catch (err) {
-    console.error('❌ updateProfile error:', err.message);
+    console.error('updateProfile error:', err.message);
     res.status(500).json({ message: 'Server error' });
   }
 };

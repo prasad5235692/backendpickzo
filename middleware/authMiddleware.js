@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
-import User from "../models/User.js"; // only if you want to fetch user
+import User from "../models/User.js";
 
-export default async function authMiddleware(req, res, next) {
+const authMiddleware = async (req, res, next) => {
   const authHeader = req.headers.authorization;
 
   if (!authHeader || !authHeader.startsWith("Bearer ")) {
@@ -13,16 +13,17 @@ export default async function authMiddleware(req, res, next) {
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-    // ✅ match what you actually signed when creating the token
-    // If you signed { id: user._id }, use decoded.id
-    req.user = { userId: decoded.id || decoded.userId };
+    // ✅ decoded.id matches token generator
+    req.user = await User.findById(decoded.id).select("-password");
 
-    // Optionally fetch full user (without password)
-    // req.user = await User.findById(decoded.id).select("-password");
+    if (!req.user) {
+      return res.status(403).json({ message: "User not found" });
+    }
 
     next();
   } catch (err) {
-    console.error("JWT Verify Failed:", err.message);
     res.status(401).json({ message: "Invalid Token" });
   }
-}
+};
+
+export default authMiddleware;
